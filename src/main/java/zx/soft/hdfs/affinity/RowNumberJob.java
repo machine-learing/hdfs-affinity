@@ -82,6 +82,7 @@ public class RowNumberJob {
 	}
 
 	static class RowNumberMapper extends Mapper<LongWritable, Text, ByteWritable, RowNumberWritable> {
+
 		private long[] counters;
 		private int numReduceTasks;
 
@@ -113,9 +114,11 @@ public class RowNumberJob {
 				counters[c + 1] += counters[c];
 			}
 		}
+
 	}
 
 	static class RowNumberReducer extends Reducer<ByteWritable, RowNumberWritable, Text, Text> {
+
 		private final Text outputKey = new Text();
 
 		@Override
@@ -146,9 +149,11 @@ public class RowNumberJob {
 				context.write(outputKey, value.getValue());
 			}
 		}
+
 	}
 
 	public static class IndifferentComparator implements RawComparator<ByteWritable> {
+
 		@Override
 		public int compare(ByteWritable left, ByteWritable right) {
 			return 0;
@@ -158,6 +163,7 @@ public class RowNumberJob {
 		public int compare(byte[] b1, int s1, int l1, byte[] b2, int s2, int l2) {
 			return 0;
 		}
+
 	}
 
 }

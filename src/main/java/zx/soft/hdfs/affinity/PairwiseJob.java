@@ -78,6 +78,7 @@ public class PairwiseJob {
 	}
 
 	static class BlockMapper extends Mapper<LongWritable, Text, IntWritable, DataPointWritable> {
+
 		private long v;
 		private int h;
 		private IntWritable outKey;
@@ -125,6 +126,7 @@ public class PairwiseJob {
 				context.write(outKey, outVal);
 			}
 		}
+
 	}
 
 	static class BlockReducer extends Reducer<IntWritable, DataPointWritable, Text, Text> {
@@ -182,6 +184,7 @@ public class PairwiseJob {
 			}
 			return Math.exp(Math.sqrt(sum) / (-2 * Math.pow(BlockReducer.SIGMA, 2)));
 		}
+
 	}
 
 }
